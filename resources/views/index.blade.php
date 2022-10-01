@@ -26,11 +26,13 @@
 <body>
 
     <div class="container" style="margin-top: 50px;">
-
+        @if(Session::has('success'))
+        <p class="alert alert-success">{{ Session::get('success') }}</p>
+        @endif
         <h3 class="text-center text-danger"><b>Laravel CRUD</b> </h3>
         <a href="/create" class="btn btn-outline-success">Add New Product</a>
-
-        <table class="table table-bordered data-table">
+       
+        <table class="table table-bordered data-table mt-3">
             <thead>
                 <tr>
                     <th>SR.NO</th>
@@ -45,34 +47,35 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $val)
-                    <tr>
-                        <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $val->name }}</td>
-                        @php
-                            $catogory = ['Books', 'Electronics', 'Furniture', 'Beauty', 'Mobile', 'shoes ', 'Clothing'];
-                        @endphp
-                        @foreach ($catogory as $value => $label)
-                            @if ($val->category == $value)
-                                <td> {{ $label }}
-                                </td>
-                            @endif
-                        @endforeach
-                        <td>{{ $val->price }}</td>
-                        <td>{{ $val->quantity }}</td>
-                        <td>{{ $val->description }}</td>
-                        <td><a href="/view/{{ $val->id }}" class="btn btn-outline-success">View</a></td>
-                        <td><a href="/edit/{{ $val->id }}" class="btn btn-outline-primary">Update</a></td>
-                        <td>
-                            <form action="/delete/{{ $val->id }}" method="post">
-                                <button class="btn btn-outline-danger" onclick="return confirm('Are you sure?');"
-                                    type="submit">Delete</button>
-                                @csrf
-                                @method('delete')
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach ($products as $val)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $val->name }}</td>
+                            @php
+                                $catogory = ['Books', 'Electronics', 'Furniture', 'Beauty', 'Mobile', 'shoes ', 'Clothing'];
+                            @endphp
+                            @foreach ($catogory as $value => $label)
+                                @if ($val->category == $value)
+                                    <td> {{ $label }}
+                                    </td>
+                                @endif
+                            @endforeach
+                            <td>{{ $val->price }}</td>
+                            <td>{{ $val->quantity }}</td>
+                            <td>{{ $val->description }}</td>
+                            <td><a href="/view/{{ $val->id }}" class="btn btn-outline-success">View</a></td>
+                            <td><a href="/edit/{{ $val->id }}" class="btn btn-outline-primary">Update</a></td>
+                            <td>
+                                <form action="/delete/{{ $val->id }}" method="post">
+                                    <button class="btn btn-outline-danger" onclick="return confirm('Are you sure?');"
+                                        type="submit">Delete</button>
+                                    @csrf
+                                    @method('delete')
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                            
             </tbody>
         </table>
     </div>

@@ -15,16 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/create', function () {
-//     return view('create');
-// });
-// Route::get('/',[ProductController::class,'index']);
-// Route::post('/',[ProductController::class,'']);
 Route::get('/',[ProductController::class,'index']);
 Route::get('/task2',[Task2::class,'index']);
-Route::resource('/','App\Http\Controllers\ProductController');
-
-
 Route::get('/create',function(){
 return view('create');
 });

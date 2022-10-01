@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 255)->nullable();
             $table->string('category', 100)->nullable();
             $table->decimal('price', 22)->nullable()->default(0.00);
-            $table->decimal('quantity', 22)->nullable()->default(0);
+            $table->integer('quantity', 22)->nullable()->default(0);
             $table->string('description', 500)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
